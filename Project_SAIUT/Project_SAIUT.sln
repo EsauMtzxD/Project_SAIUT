@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_SAUIT.Web", "Project_SAUIT.Web\Project_SAUIT.Web.csproj", "{A3920150-7568-4A4E-A590-0EFF3C0FF8F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_SAUIT.Web.Tests", "Project_SAUIT.Web.Tests\Project_SAUIT.Web.Tests.csproj", "{BD2C434D-ADBE-4769-A82E-9FF1508B7437}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3920150-7568-4A4E-A590-0EFF3C0FF8F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3920150-7568-4A4E-A590-0EFF3C0FF8F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3920150-7568-4A4E-A590-0EFF3C0FF8F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3920150-7568-4A4E-A590-0EFF3C0FF8F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD2C434D-ADBE-4769-A82E-9FF1508B7437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2C434D-ADBE-4769-A82E-9FF1508B7437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2C434D-ADBE-4769-A82E-9FF1508B7437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD2C434D-ADBE-4769-A82E-9FF1508B7437}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB7204D3-ED30-475C-9103-B228221E49E9}
+	EndGlobalSection
+EndGlobal
