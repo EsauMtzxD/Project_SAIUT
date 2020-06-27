@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,16 @@ namespace Project_SAIUT.Entity
         [StringLength(150, ErrorMessage = "El campo nombre solo permite 150 caracteres")]
         [DataType(DataType.Text, ErrorMessage = "El campo Nombre solo permite texto")]
         public string Nombre { get; set; }
+
+        [Required(ErrorMessage = "El campo App es Obligatorio")]
+        [StringLength(50, ErrorMessage = "El campo App Solo permite 50 Caracteres")]
+        [DataType(DataType.Text, ErrorMessage = "El campo App solo permite texto")]
+        public string App { get; set; }
+
+        [Required(ErrorMessage = "El campo Apm es obligatorio")]
+        [StringLength(50, ErrorMessage = "El campo Apm solo permite 50 caracteres.")]
+        [DataType(DataType.Text, ErrorMessage = "El campo Apm solo permite texto")]
+        public string Apm { get; set; }
 
         [Required(ErrorMessage = "El campo Fecha_Nacimiento es obligatorio")]
         [DataType(DataType.DateTime)]
@@ -37,6 +48,14 @@ namespace Project_SAIUT.Entity
         [Required(ErrorMessage = "El campo Turno es Obligatorio")]
         [StringLength(1)]
         public string Turno { get; set; }
+
+        [ForeignKey("Tipo_Usuario")]
+        [Required]
+        [Range(0, int.MaxValue)]
+        public int Tipo_UsuarioId { get; set; }
+        public Tipo_Usuario Tipo_Usuario { get; set; }
+
+        public virtual ICollection<Alumno_Cuatrimestre> Alumno_Cuatrimestres { get; set; }
 
         //Id_Adeudo?
 
