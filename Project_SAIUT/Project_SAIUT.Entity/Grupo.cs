@@ -7,15 +7,17 @@ using System.Threading.Tasks;
 
 namespace Project_SAIUT.Entity
 {
-    public class Cuatrimestre
+    public class Grupo
     {
 
         [Key]
         public int Id { get; set; }
 
-        public string _Cuatrimestre { get; set; }
+        public int Grado { get; set; }
 
-        public virtual ICollection<Alumno_Cuatrimestre> Alumno_Cuatrimestres { get; set; }
+        public string _Grupo { get; set; }
+
+        public ICollection<Alumno> Alumnos { get; set; }
 
     }
 }

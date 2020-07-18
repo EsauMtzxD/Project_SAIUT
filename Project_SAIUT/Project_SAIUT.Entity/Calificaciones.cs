@@ -8,23 +8,19 @@ using System.Threading.Tasks;
 
 namespace Project_SAIUT.Entity
 {
-    public class Alumno_Cuatrimestre
+    public class Calificaciones
     {
 
         [Key]
         public int Id { get; set; }
 
         [ForeignKey("Alumno")]
-        [Required]
-        [Range(0, int.MaxValue)]
-        public int AlumnoId { get; set; }
+        public int Id_Alumno { get; set; }
         public Alumno Alumno { get; set; }
 
-        [ForeignKey("Cuatrimestre")]
-        [Required]
-        [Range(0, int.MaxValue)]
-        public int CuatrimestreId { get; set; }
-        public Cuatrimestre Cuatrimestre { get; set; }
+        [ForeignKey("Materia")]
+        public int Id_Materia { get; set; }
+        public Materia Materia { get; set; }
 
     }
 }

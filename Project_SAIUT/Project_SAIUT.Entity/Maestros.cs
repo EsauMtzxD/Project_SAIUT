@@ -8,26 +8,21 @@ using System.Threading.Tasks;
 
 namespace Project_SAIUT.Entity
 {
-    public class Alumno
+    public class Maestros
     {
 
         [Key]
-        public int Matricula { get; set; }
+        public int Id { get; set; }
 
         [ForeignKey("Usuarios")]
-        public int Id_Usario { get; set; }
+        public int Id_Usuario { get; set; }
         public Usuarios Usuarios { get; set; }
-
-        [ForeignKey("Grupo")]
-        public int Id_Grupo { get; set; }
-        public Grupo Grupo { get; set; }
 
         [ForeignKey("Carrera")]
         public int Id_Carrera { get; set; }
         public Carrera Carrera { get; set; }
 
-        public ICollection<Calificaciones> Calificaciones { get; set; }
-        public ICollection<Colegiatura> Colegiaturas { get; set; }
+        public ICollection<Materia> Materias { get; set; }
 
     }
 }

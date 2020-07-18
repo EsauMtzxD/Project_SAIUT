@@ -7,20 +7,16 @@ using System.Threading.Tasks;
 
 namespace Project_SAIUT.Entity
 {
-    public class Tipo_Usuario
+    public class Perfiles
     {
 
         [Key]
         public int Id { get; set; }
 
         [DataType(DataType.Text)]
-        public string Tipo { get; set; }
+        [StringLength(50)]
+        public string Perfil { get; set; }
 
-        public virtual ICollection<Alumno> Alumnos { get; set; }
-
-        public virtual ICollection<Maestro> Maestros { get; set; }
-
-        public virtual ICollection<Usuario> Usuarios { get; set; }
-
+        public ICollection<Usuarios> Usuarios { get; set; }
     }
 }
