@@ -109,11 +109,12 @@
     <Compile Include="Grupo.cs" />
     <Compile Include="Maestros.cs" />
     <Compile Include="Materia.cs" />
-    <Compile Include="Migrations\202007181319586_initial.cs" />
-    <Compile Include="Migrations\202007181319586_initial.Designer.cs">
-      <DependentUpon>202007181319586_initial.cs</DependentUpon>
+    <Compile Include="Migrations\202007182218577_initial.cs" />
+    <Compile Include="Migrations\202007182218577_initial.Designer.cs">
+      <DependentUpon>202007182218577_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Paginas.cs" />
     <Compile Include="Perfiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaiutDbContext.cs" />
@@ -124,8 +125,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202007181319586_initial.resx">
-      <DependentUpon>202007181319586_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202007182218577_initial.resx">
+      <DependentUpon>202007182218577_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

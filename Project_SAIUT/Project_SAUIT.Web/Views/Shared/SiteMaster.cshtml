@@ -1,0 +1,128 @@
+﻿
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+
+    <script src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" data-auto-replace-svg="nest"></script>
+
+    <title>S-I-I-ES - AVISOS</title>
+</head>
+
+@{
+
+    if (User.Identity.IsAuthenticated)
+    {
+
+        int obj = Project_SAIUT.Entity.Usuarios.GetPerfil(User.Identity.Name);
+        List<Project_SAIUT.Entity.Paginas> lst = new List<Project_SAIUT.Entity.Paginas>();
+        lst = Project_SAIUT.Entity.Paginas.GetPaginas(Convert.ToInt32(obj));
+
+        Project_SAIUT.Entity.Usuarios usr = new Project_SAIUT.Entity.Usuarios();
+
+        if(obj == 1)
+        {
+            usr = Project_SAIUT.Entity.Usuarios.GetDatUsuario(User.Identity.Name);
+        }
+        else
+        {
+            usr = Project_SAIUT.Entity.Usuarios.GetMaestro(User.Identity.Name);
+        }
+
+        <body>
+            <!-- Menú de navegación -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <!-- Botón para el menú responsivo -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Contenedor del menú -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav w-100">
+                        <!-- Contenedor btn-group -->
+                        <div class="btn-group w-100 menu">
+
+                            @{
+                                foreach (var x in lst)
+                                {
+
+                                    <a href="@x.URL" class="apply btnh btn btn-primary rounded-0 font-weight-bold">
+                                        <i class="<@x.icon"></i>
+                                        <span>@x.Nombre</span>
+                                    </a>
+
+                                }
+                            }
+                            <a href="@Url.Action("Logout", "Account")" class="apply btnh btn btn-danger rounded-0 font-weight-bold">
+                                <i class="fas fa-external-link-alt px-1 font-weight-bold"></i>
+                                <span>SALIR</span>
+                            </a>
+                        </div>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Contenedor para la informacion del alumno, en este contenedor se consultara a la base de datos
+            el inicio de sesión y se mostraran los datos del alumno logeado en el sitio -->
+            <div class="py-2" style="background-color:#21937c;">
+                <div class="row align-items-center justify-content-center text-white m-1">
+                        <div class="col-md-2">
+                            <i class="fas fa-user"></i>
+                            <span class="font-weight-bold">Nombre:</span>
+                            <span class="px-1">@usr.Nombre</span>
+                        </div>
+
+                    @if (!string.IsNullOrEmpty(usr.Grado))
+                    {
+                        <div class="col-md-2">
+                            <i class="fas fa-user-graduate"></i>
+                            <span class="font-weight-bold">Grupo Actual:</span>
+                            <span class="px-1">"@usr.Grado"</span>
+                        </div>
+
+                    }
+
+                    @if (!string.IsNullOrEmpty(usr.Grupo))
+                    {
+                        <div class="col-md-2">
+                            <i class="fas fa-user-graduate"></i>
+                            <span class="font-weight-bold">Grado Actual:</span>
+                            <span class="px-1">@usr.Grupo°</span>
+                        </div>
+                    }
+
+                    <div class="col-md-3">
+                        <i class="fas fa-copyright"></i>
+                        <span class="font-weight-bold">CURP:</span>
+                        <span class="px-1">@usr.Curp</span>
+                    </div>
+                    <div class="col-md-3">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span class="font-weight-bold">Carrera:</span>
+                        <span class="px-1">@usr.Carrera</span>
+                    </div>
+                </div>
+            </div>
+           
+            @RenderBody()
+
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+            <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+        </body>
+
+        }
+    }
+
+    </html>

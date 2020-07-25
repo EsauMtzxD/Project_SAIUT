@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" data-auto-replace-svg="nest"></script>
+
+    <title>S-I-I-ES - Login</title>
+</head>
+
+<body>
+    <!-- Anuncio del header -->
+    <div>
+        <h2 class="text-center font-weight-bold py-3 text-white" style="background-color: #21937c;">SISTEMA INTEGRAL DE INFORMACIÓN ESCOLAR</h2>
+    </div>
+
+    <!-- Contenedor del formulario -->
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-center">
+            <h2 class="font-weight-bold py-2" style="color: black;">INICIO DE SESIÓN</h2>
+        </div>
+        <!-- Formulario -->
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="col-md-7" style="background-color: #bfbfbf; border-radius: 5px;">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <h4 class="text-center font-weight-bold py-2" style="color: black;">Introduce tu matricula y tu contraseña asignada</h4>
+                    </div>
+                    <form action="" method="POST">
+                        <div class="form-group font-weight-bold py-1" style="color: black;">
+                            <div class="row">
+                                <i class="fas fa-user px-1"></i>
+                                <p>USUARIO*</p>
+                            </div>
+                            <!--input id="login" type="text" name="user" class="form-control font-weight-bold rounded" required /-->
+                            @Html.TextBox("login", "", new { @class = "form-control font-weight-bold rounded", @type = "text", @placeholder = "Matricula", @required = "required" })
+                        </div>
+
+                        <div class="form-group font-weight-bold py-1" style="color: black;">
+                            <div class="row">
+                                <i class="fas fa-key px-1"></i>
+                                <p>CONTRASEÑA*</p>
+                            </div>
+                            <!--input id="pass" type="text" name="password" class="form-control font-weight-bold rounded" required /-->
+                            @Html.TextBox("pass", "", new { @class = "form-control font-weight-bold rounded", @required = "required", @type = "password", @placeholder = "●●●●●●●●●●●●" })
+                        </div>
+
+                        <input type="submit" value="ENTRAR" class="btn btn-info bg-custom font-weight-bold border-0 w-100 py-2" />
+                        <div class="d-flex align-items-center justify-content-center py-4">
+                            <a href="">Recuperar contraseña</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+
+</html>

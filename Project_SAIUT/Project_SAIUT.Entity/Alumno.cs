@@ -12,7 +12,9 @@ namespace Project_SAIUT.Entity
     {
 
         [Key]
-        public int Matricula { get; set; }
+        public int Id { get; set; }
+
+        public string Matricula { get; set; }
 
         [ForeignKey("Usuarios")]
         public int Id_Usario { get; set; }

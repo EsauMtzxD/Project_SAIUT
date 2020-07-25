@@ -13,7 +13,7 @@ namespace Project_SAIUT.Entity.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202007181319586_initial"; }
+            get { return "202007182218577_initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -11,12 +11,13 @@ namespace Project_SAIUT.Entity.Migrations
                 "dbo.Alumno",
                 c => new
                     {
-                        Matricula = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
+                        Matricula = c.String(),
                         Id_Usario = c.Int(nullable: false),
                         Id_Grupo = c.Int(nullable: false),
                         Id_Carrera = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.Matricula)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Carrera", t => t.Id_Carrera)
                 .ForeignKey("dbo.Grupo", t => t.Id_Grupo)
                 .ForeignKey("dbo.Usuarios", t => t.Id_Usario)
@@ -85,13 +86,10 @@ namespace Project_SAIUT.Entity.Migrations
                         password = c.String(nullable: false, maxLength: 50),
                         Curp = c.String(nullable: false, maxLength: 50),
                         Id_Perfil = c.Int(nullable: false),
-                        Usuarios_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Usuarios", t => t.Usuarios_Id)
                 .ForeignKey("dbo.Perfiles", t => t.Id_Perfil)
-                .Index(t => t.Id_Perfil)
-                .Index(t => t.Usuarios_Id);
+                .Index(t => t.Id_Perfil);
             
             CreateTable(
                 "dbo.Perfiles",
@@ -139,11 +137,9 @@ namespace Project_SAIUT.Entity.Migrations
             DropForeignKey("dbo.Materia", "Id_Maestro", "dbo.Maestros");
             DropForeignKey("dbo.Maestros", "Id_Usuario", "dbo.Usuarios");
             DropForeignKey("dbo.Usuarios", "Id_Perfil", "dbo.Perfiles");
-            DropForeignKey("dbo.Usuarios", "Usuarios_Id", "dbo.Usuarios");
             DropForeignKey("dbo.Maestros", "Id_Carrera", "dbo.Carrera");
             DropForeignKey("dbo.Calificaciones", "Id_Alumno", "dbo.Alumno");
             DropIndex("dbo.Colegiatura", new[] { "Id_Alumno" });
-            DropIndex("dbo.Usuarios", new[] { "Usuarios_Id" });
             DropIndex("dbo.Usuarios", new[] { "Id_Perfil" });
             DropIndex("dbo.Maestros", new[] { "Id_Carrera" });
             DropIndex("dbo.Maestros", new[] { "Id_Usuario" });
