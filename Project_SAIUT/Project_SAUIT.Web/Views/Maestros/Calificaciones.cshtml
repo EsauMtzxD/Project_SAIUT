@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Calificaciones";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+<div class="py-4">
+    <div class="row m-0">
+        <div class="col-md-4">
+            <!-- Select para hacer un filtro de los alumnos por grupos, se consultara desde la base de datos
+            segun el grupo los nombres de los alumnos -->
+            <h3 class="font-weight-bold text-center py-2">Grupo</h3>
+            <select name="cuatri" class="custom-select font-weight-bold rounded py-2" id="cuatri">
+                <option value="1">9°A</option>
+                <option value="2">3°A</option>
+                <option value="3">10°A</option>
+                <option value="4">1°C</option>
+            </select>
+            <!-- Segun el grupo seleccionado en el select, seran los alumnos que se dibujaran en el list-group
+            y a cada uno se le asignara su calificacion por medio del formulario -->
+            <h3 class="font-weight-bold text-center py-2">Listado de Alumnos</h3>
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="nombre1" data-toggle="list" href="#list-nombre1" role="tab" aria-controls="Nombre1">Juan Gustavo Salas Flores</a>
+                <a class="list-group-item list-group-item-action" id="nombre2" data-toggle="list" href="#list-nombre2" role="tab" aria-controls="Nombre2">Elias Jaramillo Lopez</a>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h3 class="font-weight-bold text-center py-2">Calificaciones</h3>
+            <div class="tab-pane fade show active" id="list-nombre1" role="tabpanel" aria-labelledby="9A">
+                <div class="font-weight-bold">
+                    <div class="row m-0">
+                        <i class="fas fa-user px-1"></i>
+                        <!-- Al seleccionar a un alumno se añadira el nombre en el input y se le asignara una calificacion
+                        el encargado puede, borrar y añadir calificaciones -->
+                        <p>Alumno</p>
+                        <input type="text" name="user" class="form-control font-weight-bold rounded py-1 m-0" required />
+                    </div>
+                    <div class="row m-0 py-4">
+                        <i class="fas fa-clipboard-list px-1"></i>
+                        <p>Calificacion</p>
+                        <input type="text" name="user" class="form-control font-weight-bold rounded py-1 m-0" required />
+                    </div>
+                    <div class="w-100 justify-content-end d-flex">
+                        <div class="justifi-content-between">
+                            <a href="#" class="btn btn-danger font-weight-bold">
+                                <i class="fas fa-trash px-1 font-weight-bold"></i>
+                                <span>Borrar</span>
+                            </a>
+                            <a href="#" class="btn btn-success font-weight-bold">
+                                <i class="fas fa-save px-1 font-weight-bold"></i>
+                                <span>Guardar</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="list-nombre2" role="tabpanel" aria-labelledby="3A">
+            </div>
+        </div>
+    </div>
+</div>
+
+

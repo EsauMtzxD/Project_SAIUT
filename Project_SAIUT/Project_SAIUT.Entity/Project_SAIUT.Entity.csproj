@@ -107,6 +107,7 @@
     <Compile Include="Carrera.cs" />
     <Compile Include="Colegiatura.cs" />
     <Compile Include="Grupo.cs" />
+    <Compile Include="Listas_Model.cs" />
     <Compile Include="Maestros.cs" />
     <Compile Include="Materia.cs" />
     <Compile Include="Migrations\202007182218577_initial.cs" />

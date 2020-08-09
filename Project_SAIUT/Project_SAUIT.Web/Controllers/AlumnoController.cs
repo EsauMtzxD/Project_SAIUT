@@ -10,6 +10,9 @@ namespace Project_SAUIT.Web.Controllers
 {
     public class AlumnoController : Controller
     {
+
+        public static int Cuatri = 0;
+
         // GET: Alumno
         public ActionResult Index()
         {
@@ -21,7 +24,32 @@ namespace Project_SAUIT.Web.Controllers
 
             ViewBag.items = ListCuatri();
 
-            return View();
+            ViewBag.c = "Cuatrimestre " + Convert.ToString(Cuatri);
+
+            DataRow usr = Usuarios.GetUsuarioByUsr(User.Identity.Name).Rows[0];
+
+            DataTable dt = Usuarios.GetCalificaciones(Convert.ToInt32(usr["login"]), Cuatri);
+
+            Project_SAIUT.Entity.Calificaciones c = new Calificaciones();
+
+            foreach(DataRow dr in dt.Rows)
+            {
+
+                c.maestro = dr["maestro"].ToString();
+                c.materia = dr["materia"].ToString();
+                c.calificaciones = Convert.ToDecimal(dr["calificacion"]);
+
+            }
+
+            return View(c);
+        }
+
+        public ActionResult GetCuatri(int cuatri)
+        {
+            Cuatri = cuatri;
+
+            return RedirectToAction("Calificaciones", "Alumno");
+
         }
 
         public List<SelectListItem> ListCuatri()
@@ -29,6 +57,7 @@ namespace Project_SAUIT.Web.Controllers
 
             List<SelectListItem> lst = new List<SelectListItem>();
 
+            lst.Add(new SelectListItem { Text = "-- Seleccionar --", Value = "" });
             lst.Add(new SelectListItem { Text = "CUATRIMESTRE 1°", Value = "1" });
             lst.Add(new SelectListItem { Text = "CUATRIMESTRE 2°", Value = "2" });
             lst.Add(new SelectListItem { Text = "CUATRIMESTRE 3°", Value = "3" });
@@ -37,24 +66,17 @@ namespace Project_SAUIT.Web.Controllers
             lst.Add(new SelectListItem { Text = "CUATRIMESTRE 6°", Value = "6" });
             lst.Add(new SelectListItem { Text = "CUATRIMESTRE 7°", Value = "7" });
             lst.Add(new SelectListItem { Text = "CUATRIMESTRE 8°", Value = "8" });
-            lst.Add(new SelectListItem { Text = "CUATRIMESTRE 9°", Value = "9", Selected = true });
+            lst.Add(new SelectListItem { Text = "CUATRIMESTRE 9°", Value = "9" });
             lst.Add(new SelectListItem { Text = "CUATRIMESTRE 10°", Value = "10" });
             lst.Add(new SelectListItem { Text = "CUATRIMESTRE 11°", Value = "11" });
-
-            lst.Insert(0, new SelectListItem { Text = "-- Seleccionar --", Value = "" });
 
             return lst;
 
         }
 
-        public JsonResult GetCalificaciones(string Cuatri)
+        public ActionResult Adeudo()
         {
-
-            DataRow usr = Usuarios.GetUsuarioByUsr(User.Identity.Name).Rows[0];
-            int cuatri = Convert.ToInt32(Cuatri);
-
-            DataTable dt = Usuarios.GetCalificaciones(Convert.ToInt32(usr["Id"]), cuatri);
-
+            return View();
         }
 
     }

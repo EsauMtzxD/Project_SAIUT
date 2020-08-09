@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+;
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+input[type="submit"]:hover {
+    background-color: #21937c;
+}
+
+.btnh {
+    height: 5rem;
+}
+
+.apply {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hov:hover {
+    color: #21937c;
+}
+
+.btn1:hover {
+    background-color: #21937c;
+}
+
+.h-green:hover {
+    color: #21937c;
+}
+
+.list-group-item {
+    color: black;
+    font-size: 17px;
+    font-weight: bold;
+    background-color: #21937c;
+}
+
+.list-group-item.active {
+    background-color: black;
+    border-color: #21937c;
+    border: none !important;
+}
+
+.list-group-item-action:focus,
+.list-group-item-action:hover {
+    color: white;
+    background-color: black;
+}
+
+@media only screen and (max-width: 768px) {}
+
+@media only screen and (max-width: 500px) {
+    .menu {
+        flex-direction: column;
+    }
+}

@@ -30,12 +30,22 @@ namespace Project_SAUIT.Web.Controllers
 
             DataTable dt = Usuarios.GetUsuario(login, pass);
 
+            DataRow _dr = dt.Rows[0];
+
             if (dt != null && dt.Rows.Count > 0)
             {
 
                 FormsAuthentication.SetAuthCookie(login, true);
 
-                return RedirectToAction("Index", "Alumno");
+                if(Convert.ToInt32(_dr["Id_Perfil"].ToString()) == 1)
+                {
+                    return RedirectToAction("Index", "Alumno");
+                }
+                else
+                {
+                    return RedirectToAction("Alumnos", "Maestros");
+                }
+
 
             }
             else

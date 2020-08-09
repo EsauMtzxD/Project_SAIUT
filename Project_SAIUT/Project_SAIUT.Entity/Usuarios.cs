@@ -276,6 +276,7 @@ namespace Project_SAIUT.Entity
 
             Usuarios u = new Usuarios();
             SqlDataReader _reader;
+            DataTable dt = new DataTable();
             using(SqlConnection conn = new SqlConnection(ConnectionString))
             {
 
@@ -284,24 +285,23 @@ namespace Project_SAIUT.Entity
 
                     conn.Open();
 
-                    string sql = "select CONCAT(u.Nombre, ' ', u.App, ' ', u.Apm) as Nombre, u.Curp, c.descripcion" +
-                                 "from Usuarios u inner" +
-                                 "join Maestros m on u.Id = m.Id_Usuario" +
-                                 "inner join Carrera c on c.Id_Carrera = m.Id_Carrera where u.login = @usr";
+                    string sql = "select CONCAT(u.Nombre, ' ', u.App, ' ', u.Apm) as Nombre, u.Curp, c.descripcion from Usuarios u inner join Maestros m on u.Id = m.Id_Usuario inner join Carrera c on c.Id_Carrera = m.Id_Carrera where u.login = @usr";
 
-                    using(SqlCommand cmd = new SqlCommand(sql, conn))
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
 
                         cmd.Parameters.AddWithValue("@usr", usr);
 
-                        _reader = cmd.ExecuteReader();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
 
-                        while (_reader.Read())
+                        da.Fill(dt);
+
+                        foreach(DataRow dr in dt.Rows)
                         {
 
-                            u.Nombre = _reader["Nombre"].ToString();
-                            u.Curp = _reader["Curp"].ToString();
-                            u.Carrera = _reader["descripcion"].ToString();
+                            u.Nombre = dr["Nombre"].ToString();
+                            u.Curp = dr["Curp"].ToString();
+                            u.Carrera = dr["descripcion"].ToString();
 
                         }
 
@@ -328,10 +328,53 @@ namespace Project_SAIUT.Entity
 
         }
 
-        public static DataTable GetCalificaciones(int id, string cuatri)
+        public static DataTable GetCalificaciones(int id, int cuatri = 9)
         {
 
+            DataTable dt = new DataTable();
 
+            using(SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+
+                try
+                {
+
+                    conn.Open();
+
+                    string sql = "select *from calf where alumno_mat = @id and cuatri = @cuatri";
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@cuatri", cuatri);
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+
+                            da.Fill(dt);
+
+                        }
+
+                    }
+
+                    conn.Close();
+
+                    return dt;
+
+                }
+                catch(Exception ex)
+                {
+
+                    if(conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+
+                    return null;
+                }
+
+            }
 
         }
 

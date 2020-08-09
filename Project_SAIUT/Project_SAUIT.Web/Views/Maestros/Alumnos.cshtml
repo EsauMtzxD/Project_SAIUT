@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Alumnos";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+
+<div class="py-4">
+    <div class="row m-0">
+        <div class="col-md-4">
+            <h3 class="font-weight-bold text-center py-2">Grupos</h3>
+            <!-- La idea con el list-group es que se creen automaticamente dependiendo de los grupos que el maestro tenga
+            yo puse estos 4 como ejemplo pero el numero en total seria en base a los grupos del asignados -->
+           @{ 
+
+               List<Project_SAIUT.Entity.Grupo> lst = Project_SAIUT.Entity.Grupo.GetGrupos();
+               int list = 0;
+               List<string> lstString = new List<string>();
+               
+           }
+            <div class="list-group" id="list-tab" role="tablist">
+
+                @foreach (var item in lst)
+                {
+
+                    <li class="list-group-item " id="@item.Grado" data-toggle="list" href="#list-@item.Grado" role="tab" aria-controls="@item.Grado@item._Grupo" onclick="SelectList(@item.Grado)">Grupo @item.Grado°@item._Grupo</li>
+                    lstString.Add("#list-" + Convert.ToString(item.Grado));
+                    list++;
+                }
+
+                @{ 
+
+                    string[] array = new string[list];
+                    string[] nombre = new string[list];
+                    int[] grados = new int[list];
+
+                    int a = 0;
+
+                    foreach (var i in lst)
+                    {
+
+                        array[a] = Convert.ToString(i.Grado) + i._Grupo;
+                        nombre[a] = "Grupo " + i.Grado.ToString() + "°" + i._Grupo;
+                        grados[a] = i.Grado;
+
+                        a++;
+
+                    }
+
+                    int cont = 0;
+
+                }
+
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h3 class="font-weight-bold text-center py-2">Listado de grupos</h3>
+            <!-- Al momento de yo seleccionar el grupo, saldria una tabla en donde por medio de la base de datosse va a ver todos los alumnos del grupo seleccionado -->
+
+            @foreach (var item in lstString)
+            {
+
+
+                List<Project_SAIUT.Entity.Listas_Model> listaGrupos = Project_SAIUT.Entity.Listas_Model.GetGrupoListas(grados[cont]);
+
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="@item[cont]" role="tabpanel" aria-labelledby="@array[cont]">
+                        <table class="table table-striped table-dark table-bordered">
+                            <thead>
+                                <tr class="text-center">
+                                    <th colspan="4">@nombre[cont]</th>
+                                </tr>
+                                <tr class="text-center">
+                                    <th scope="col" style="width: 5%;">#</th>
+                                    <th scope="col" style="width: 30%;">Nombre</th>
+                                    <th scope="col" style="width: 30%;">Apellido Paterno</th>
+                                    <th scope="col" style="width: 30%;">Apellido Materno</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach(var l in listaGrupos)
+                                    {
+                                        int _i = 1;
+                                        <td>@_i</td>
+                                        <td>@l.Nombre</td>
+                                        <td>@l.App</td>
+                                        <td>@l.Apm</td>
+                                        _i++;
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                cont++;
+            }
+
+        </div>
+    </div>
+</div>
