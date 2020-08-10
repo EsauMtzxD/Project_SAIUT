@@ -11,12 +11,33 @@ namespace Project_SAUIT.Web.Controllers
     public class AlumnoController : Controller
     {
 
-        public static int Cuatri = 0;
-
         // GET: Alumno
         public ActionResult Index()
         {
             return View();
+        }
+
+        public JsonResult GetCalificaciones(string usr, int cuatri)
+        {
+
+            DataTable dt = Usuarios.GetCalificaciones(Convert.ToInt32(usr), cuatri);
+
+            List<Calificaciones> lst = new List<Calificaciones>();
+
+            foreach (DataRow _dr in dt.Rows)
+            {
+
+                Project_SAIUT.Entity.Calificaciones c = new Calificaciones();
+
+                c.maestro = _dr["maestro"].ToString();
+                c.materia = _dr["materia"].ToString();
+                c.calificaciones = Convert.ToDecimal(_dr["calificacion"]);
+                lst.Add(c);
+
+            }
+
+            return Json(lst, JsonRequestBehavior.AllowGet);
+
         }
 
         public ActionResult Calificaciones()
@@ -24,40 +45,16 @@ namespace Project_SAUIT.Web.Controllers
 
             ViewBag.items = ListCuatri();
 
-            ViewBag.c = "Cuatrimestre " + Convert.ToString(Cuatri);
 
-            DataRow usr = Usuarios.GetUsuarioByUsr(User.Identity.Name).Rows[0];
-
-            DataTable dt = Usuarios.GetCalificaciones(Convert.ToInt32(usr["login"]), Cuatri);
-
-            Project_SAIUT.Entity.Calificaciones c = new Calificaciones();
-
-            foreach(DataRow dr in dt.Rows)
-            {
-
-                c.maestro = dr["maestro"].ToString();
-                c.materia = dr["materia"].ToString();
-                c.calificaciones = Convert.ToDecimal(dr["calificacion"]);
-
-            }
-
-            return View(c);
+            return View();
         }
 
-        public ActionResult GetCuatri(int cuatri)
-        {
-            Cuatri = cuatri;
-
-            return RedirectToAction("Calificaciones", "Alumno");
-
-        }
 
         public List<SelectListItem> ListCuatri()
         {
 
             List<SelectListItem> lst = new List<SelectListItem>();
 
-            lst.Add(new SelectListItem { Text = "-- Seleccionar --", Value = "" });
             lst.Add(new SelectListItem { Text = "CUATRIMESTRE 1°", Value = "1" });
             lst.Add(new SelectListItem { Text = "CUATRIMESTRE 2°", Value = "2" });
             lst.Add(new SelectListItem { Text = "CUATRIMESTRE 3°", Value = "3" });
@@ -69,6 +66,8 @@ namespace Project_SAUIT.Web.Controllers
             lst.Add(new SelectListItem { Text = "CUATRIMESTRE 9°", Value = "9" });
             lst.Add(new SelectListItem { Text = "CUATRIMESTRE 10°", Value = "10" });
             lst.Add(new SelectListItem { Text = "CUATRIMESTRE 11°", Value = "11" });
+
+            lst.Insert(0, new SelectListItem { Value = "", Text = "-- Seleccionar Cuatrimestre --" });
 
             return lst;
 

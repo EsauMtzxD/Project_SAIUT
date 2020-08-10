@@ -10,13 +10,13 @@
             <h3 class="font-weight-bold text-center py-2">Grupos</h3>
             <!-- La idea con el list-group es que se creen automaticamente dependiendo de los grupos que el maestro tenga
             yo puse estos 4 como ejemplo pero el numero en total seria en base a los grupos del asignados -->
-           @{ 
+            @{
 
-               List<Project_SAIUT.Entity.Grupo> lst = Project_SAIUT.Entity.Grupo.GetGrupos();
-               int list = 0;
-               List<string> lstString = new List<string>();
-               
-           }
+                List<Project_SAIUT.Entity.Grupo> lst = Project_SAIUT.Entity.Grupo.GetGrupos();
+                int list = 0;
+                List<string> lstString = new List<string>();
+
+            }
             <div class="list-group" id="list-tab" role="tablist">
 
                 @foreach (var item in lst)
@@ -27,7 +27,7 @@
                     list++;
                 }
 
-                @{ 
+                @{
 
                     string[] array = new string[list];
                     string[] nombre = new string[list];
@@ -78,7 +78,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    @foreach(var l in listaGrupos)
+                                    @foreach (var l in listaGrupos)
                                     {
                                         int _i = 1;
                                         <td>@_i</td>
@@ -98,3 +98,4 @@
         </div>
     </div>
 </div>
+
