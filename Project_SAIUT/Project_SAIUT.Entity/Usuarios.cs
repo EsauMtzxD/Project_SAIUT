@@ -275,7 +275,6 @@ namespace Project_SAIUT.Entity
         {
 
             Usuarios u = new Usuarios();
-            SqlDataReader _reader;
             DataTable dt = new DataTable();
             using(SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -372,6 +371,160 @@ namespace Project_SAIUT.Entity
                     }
 
                     return null;
+                }
+
+            }
+
+        }
+
+        public static string GetAlumnoById(int id)
+        {
+
+            DataTable dt = new DataTable();
+
+            using(SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+
+                try
+                {
+
+                    conn.Open();
+
+                    string sql = "select CONCAT(u.Nombre, ' ', u.App, ' ', u.Apm) as Nombre from Usuarios u inner join Alumno a on u.Id = a.Id_Usario where a.Id = @id";
+
+                    using(SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+
+                        cmd.Parameters.AddWithValue("@id", id);
+
+                        using(SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+
+                            da.Fill(dt);
+
+                        }
+
+                    }
+
+                    conn.Close();
+
+                    return (dt != null && dt.Rows.Count > 0) ? dt.Rows[0]["Nombre"].ToString() : string.Empty;
+
+                }
+                catch(Exception ex)
+                {
+
+                    if(conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+
+                    return string.Empty;
+
+                }
+
+            }
+
+        }
+
+        public static DataTable getAlumnosByGrupoId(int id)
+        {
+
+            DataTable dt = new DataTable();
+
+            using(SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+
+                try
+                {
+
+                    conn.Open();
+
+                    string sql = " select CONCAT(u.Nombre, ' ', u.App, ' ', u.Apm) as Nombre, a.Id, a.Matricula " +
+                                 " from Usuarios u inner join Alumno a on u.Id = a.Id_Usario " +
+                                 " inner join Grupo g on a.Id_Grupo = g.Id where g.Id = @id ";
+
+                    using(SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+
+                        cmd.Parameters.AddWithValue("@id", id);
+
+                        using(SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+
+                            da.Fill(dt);
+
+                        }
+
+                    }
+
+                    conn.Close();
+
+                    return dt;
+
+                }
+                catch (Exception ex)
+                {
+
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+
+                    return dt;
+
+                }
+
+            }
+
+        }
+
+        public static string GetMaestroByUsr(string usr)
+        {
+
+            DataTable dt = new DataTable();
+
+            using(SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+
+                try
+                {
+
+                    conn.Close();
+
+                    string sql = "select CONCAT(u.Nombre, ' ', u.App, ' ', u.Apm) as Nombre, u.Curp, c.descripcion from Usuarios u inner join Maestros m on u.Id = m.Id_Usuario inner join Carrera c on c.Id_Carrera = m.Id_Carrera where u.login = @usr";
+
+                    using(SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+
+                        cmd.Parameters.AddWithValue("@usr", usr);
+
+                        using(SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+
+                            da.Fill(dt);
+
+                        }
+
+                    }
+
+                    conn.Close();
+
+                    return (dt != null && dt.Rows.Count > 0) ? dt.Rows[0]["Nombre"].ToString() : string.Empty;
+
+                }
+                catch(Exception ex)
+                {
+
+                    if(conn.State == ConnectionState.Open)
+                    {
+
+                        conn.Close();
+
+                    }
+
+                    return string.Empty;
+
                 }
 
             }

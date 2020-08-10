@@ -23,6 +23,55 @@ namespace Project_SAIUT.Entity
 
         private readonly static string ConnectionString = "Data Source=(local);Initial Catalog=Saiut;Integrated Security=True";
 
+        public static DataTable ListadeGrupos()
+        {
+
+            DataTable dt = new DataTable();
+
+            using(SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+
+                try
+                {
+
+                    conn.Open();
+
+                    string sql = "select CONCAT(Grado, '° ', _Grupo) as Grupos, Id from Grupo";
+
+                    using(SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+
+                        using(SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+
+                            da.Fill(dt);
+
+                        }
+
+                    }
+
+                    conn.Close();
+
+                    return dt;
+
+
+                }
+                catch(Exception ex)
+                {
+
+                    if(conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+
+                    return dt;
+
+                }
+
+            }
+
+        }
+
         public static List<Grupo> GetGrupos()
         {
 
